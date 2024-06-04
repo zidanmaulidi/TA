@@ -2,10 +2,11 @@
 
 namespace App\Filament\Resources\UserResource\Pages;
 
-use Filament\Pages\Actions;
 use App\Filament\Resources\UserResource;
+use Filament\Pages\Actions;
 use Filament\Resources\Pages\ListRecords;
-use App\Filament\Resources\UserResource\Widgets\StatsOverview;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\UsersExport;
 
 class ListUsers extends ListRecords
 {
@@ -18,10 +19,16 @@ class ListUsers extends ListRecords
         ];
     }
 
-    protected function getHeaderWidgets(): array
+    protected function getHeaderActions(): array
     {
         return [
-            StatsOverview::class,
+            Actions\Action::make('export')
+                ->label('Export to Excel')
+                ->action(function () {
+                    return Excel::download(new UsersExport, 'users.xlsx');
+                })
+                ->color('success')
+                ->icon('heroicon-o-download'),
         ];
     }
 }

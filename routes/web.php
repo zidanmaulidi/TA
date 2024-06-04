@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\InformasiController;
+use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\PDFController;
+use App\Http\Controllers\SuratController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [InformasiController::class, 'index'])->name('index');
+Route::post('/create', [LandingPageController::class, 'store']);
+Route::post('/create/surat', [SuratController::class, 'store']);
+Route::get('/pdf', [SuratController::class, 'index']);
+Route::get('/generate-pdf', [PDFController::class, 'generatePDF']);

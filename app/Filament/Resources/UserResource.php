@@ -32,6 +32,8 @@ class UserResource extends Resource
     protected static ?int $navigationSort = -2;
 
     protected static ?string $navigationGroup = 'Data Warga';
+    protected static ?string $navigationLabel = 'user';
+    protected static ?string $pluralLabel = 'User ';
 
     public static function form(Form $form): Form
     {

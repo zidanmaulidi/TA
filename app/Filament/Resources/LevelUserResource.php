@@ -26,6 +26,8 @@ class LevelUserResource extends Resource
     protected static ?string $recordTitleAttribute = 'Level_Nama';
 
     protected static ?string $navigationGroup = 'Settings';
+    protected static ?string $navigationLabel = 'Level';
+    protected static ?string $pluralLabel = 'Level ';
 
     public static function form(Form $form): Form
     {

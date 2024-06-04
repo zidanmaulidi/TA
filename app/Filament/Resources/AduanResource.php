@@ -23,23 +23,25 @@ use App\Filament\Resources\AduanResource\RelationManagers;
 class AduanResource extends Resource
 {
     protected static ?string $model = Aduan::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-chat';
-
     protected static ?string $navigationGroup = 'Menu';
+    protected static ?string $navigationLabel = 'Aduan';
+    protected static ?string $pluralLabel = 'Aduan ';
+
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
                 Card::make()
                     ->schema([
+                        TextInput::make('nama_pengadu')->required(),
                         TextInput::make('aduan')->required(),
                         RichEditor::make('isi_aduan')->required(),
-                        FileUpload::make('bukti')->required()->directory('aduans_image')->visibility('public'),
-                        // Menampilkan ID pengguna yang terautentikasi sebagai bidang tersembunyi
-                        TextInput::make('users_id')->default(Auth::id())->hidden(),
+                        FileUpload::make('bukti')
+                            ->required()
+                            ->directory('aduans_image')
+                            ->visibility('public'),
                     ])
             ]);
     }
@@ -48,18 +50,17 @@ class AduanResource extends Resource
     {
         return $table
             ->columns([
-                //
                 TextColumn::make('id')->sortable(),
                 TextColumn::make('aduan'),
                 // TextColumn::make('isi_aduan'),
-                ImageColumn::make('bukti'),
-                TextColumn::make('users.name'),
+                ImageColumn::make('bukti')->visibility('public'),
+                TextColumn::make('nama_pengadu'),
+                TextColumn::make('created_at'),
                 TextColumn::make('updated_at'),
                 TextColumn::make('tanggapan'),
-
             ])
             ->filters([
-                //
+                // Define any table filters here
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
@@ -70,14 +71,14 @@ class AduanResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
-            //
+            // Define relations here
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -85,5 +86,5 @@ class AduanResource extends Resource
             'create' => Pages\CreateAduan::route('/create'),
             'edit' => Pages\EditAduan::route('/{record}/edit'),
         ];
-    }    
+    }
 }

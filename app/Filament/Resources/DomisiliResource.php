@@ -22,7 +22,9 @@ class DomisiliResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-flag';
 
-    protected static ?string $navigationGroup = 'Settings';
+    protected static ?string $navigationGroup = 'Data Warga';
+    protected static ?string $navigationLabel = 'Domisili';
+    protected static ?string $pluralLabel = 'Domisili ';
 
     public static function form(Form $form): Form
     {
@@ -57,14 +59,14 @@ class DomisiliResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -72,5 +74,5 @@ class DomisiliResource extends Resource
             'create' => Pages\CreateDomisili::route('/create'),
             'edit' => Pages\EditDomisili::route('/{record}/edit'),
         ];
-    }    
+    }
 }

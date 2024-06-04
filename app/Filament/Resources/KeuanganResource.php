@@ -25,6 +25,8 @@ class KeuanganResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-cash';
 
     protected static ?string $navigationGroup = 'Menu';
+    protected static ?string $navigationLabel = 'Keuangan';
+    protected static ?string $pluralLabel = 'Keuangan ';
 
     public static function form(Form $form): Form
     {
@@ -67,14 +69,14 @@ class KeuanganResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -82,7 +84,7 @@ class KeuanganResource extends Resource
             'create' => Pages\CreateKeuangan::route('/create'),
             'edit' => Pages\EditKeuangan::route('/{record}/edit'),
         ];
-    }    
+    }
 
     public static function getWidgets(): array
     {

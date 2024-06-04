@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\AduanResource\Pages;
+namespace App\Filament\Resources\SuratResource\Pages;
 
-use App\Filament\Resources\AduanResource;
+use App\Filament\Resources\SuratResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ListRecords;
 
-class ListAduans extends ListRecords
-
+class ListSurats extends ListRecords
 {
-    protected static string $resource = AduanResource::class;
+    protected static string $resource = SuratResource::class;
 
     protected function getActions(): array
     {

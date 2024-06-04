@@ -27,6 +27,8 @@ class InformasiResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-exclamation-circle';
 
     protected static ?string $navigationGroup = 'Menu';
+    protected static ?string $navigationLabel = 'Informasi';
+    protected static ?string $pluralLabel = 'Informasi ';
 
     public static function form(Form $form): Form
     {
@@ -66,14 +68,14 @@ class InformasiResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -81,5 +83,5 @@ class InformasiResource extends Resource
             'create' => Pages\CreateInformasi::route('/create'),
             'edit' => Pages\EditInformasi::route('/{record}/edit'),
         ];
-    }    
+    }
 }

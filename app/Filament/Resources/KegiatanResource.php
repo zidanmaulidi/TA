@@ -24,7 +24,9 @@ class KegiatanResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-calendar';
 
     protected static ?string $navigationGroup = 'Menu';
-    
+    protected static ?string $navigationLabel = 'Kegiatan';
+    protected static ?string $pluralLabel = 'Kegiatan ';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -65,14 +67,14 @@ class KegiatanResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -80,5 +82,5 @@ class KegiatanResource extends Resource
             'create' => Pages\CreateKegiatan::route('/create'),
             'edit' => Pages\EditKegiatan::route('/{record}/edit'),
         ];
-    }    
+    }
 }
