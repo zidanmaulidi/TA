@@ -8,16 +8,18 @@ use Illuminate\Http\Request;
 
 class SuratController extends Controller
 {
-    public function index()
+    public function index($id)
     {
-        return view('surat.pengantar_pdf');
+        $surats = SuratModel::findOrFail($id); // Retrieve SuratModel by ID
+        return view('surat.pengantar_pdf', compact('surats')); // Pass the SuratModel instance to the view
     }
+
     public function store(Request $request)
     {
         // Validasi input jika diperlukan
         $request->validate([
             'nama_pengaju' => 'required',
-            'NIK' => 'required',
+            'NIK' => 'required|digits:16', // Memastikan NIK memiliki panjang tepat 16 digit
             'tempat_lahir' => 'required',
             'tgl_lahir' => 'required',
             'pekerjaan' => 'required',
@@ -25,6 +27,7 @@ class SuratController extends Controller
             'alamat' => 'required',
             'keperluan' => 'required',
         ]);
+
 
         // Buat instance Surat dengan data yang diberikan
         $surat = new SuratModel([
@@ -40,6 +43,7 @@ class SuratController extends Controller
 
         // Simpan surat ke dalam database
         $surat->save();
+
 
         // Redirect atau kembalikan respons sesuai kebutuhan
         return redirect()->route('index')->with('success', 'Surat berhasil disimpan!');

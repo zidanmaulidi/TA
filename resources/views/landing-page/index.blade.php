@@ -13,6 +13,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
     </script>
+
     <style>
         /* Custom CSS for background colors */
         body {
@@ -25,12 +26,7 @@
             /* White */
         }
 
-        .jumbotron {
-            background-color: rgba(245, 158, 11, 255);
-            /* Dark Gray */
-            color: #ffffff;
-            /* White */
-        }
+
 
         footer.footer {
             background-color: #f8f9fa;
@@ -134,12 +130,14 @@
         </div>
     </div>
     {{-- jumbotron --}}
-    <div class="jumbotron jumbotron-fluid">
+    <div class="jumbotron jumbotron-fluid"
+        style="background-image: url('{{ asset('storage/bromo2.jpg') }}'); background-size: cover; background-position: center;">
         <div class="container">
-            <h1 class="display-4">Kami Ada Untuk Melayani Yang Terbaik Untuk Masyarakat</h1>
-            <p class="lead">RW O2 Desa Bunder</p>
+            <h1 class="display-3" style="color: white">Kami Ada Untuk Melayani Yang Terbaik Untuk Masyarakat</h1>
+            <p class="lead" style="color: white">RW O2 Desa Bunder</p>
         </div>
     </div>
+
 
     {{-- informasi --}}
     <h1 style="text-align: center; font-family: Arial, sans-serif; font-size: 36px; color: #333; text-shadow: 2px 2px 2px #ccc; margin-top: 50px;"
@@ -174,25 +172,34 @@
     <h1 style="text-align: center; font-family: Arial, sans-serif; font-size: 36px; color: #333; text-shadow: 2px 2px 2px #ccc; margin-top: 50px;"
         id="kegiatan">KEGIATAN</h1>
     <br><br>
-    <div class="container-fluid" style="padding: 5S0px;">
-        <div class="row">
+    <div class="container-fluid" style="padding: 50px;">
+        <div class="row" style="display: flex; flex-wrap: wrap; justify-content: flex-start; border: 1px">
             @foreach ($kegiatans as $kegiatan)
                 <div class="col-md-3">
-                    <div class="card">
+                    <div class="card mb-4 my-card">
                         <div class="card-header">
-                            <h5 class="card-title"><?= $kegiatan->kegiatan ?></h5>
+                            <h5 class="card-title">{{ $kegiatan->kegiatan }}</h5>
                         </div>
                         <div class="card-body">
-                            <p class="card-text">Waktu: <?= $kegiatan->waktu ?></p>
-                            <p class="card-text">Lokasi: <?= $kegiatan->lokasi ?></p>
-                            <p class="card-text">Peserta: <?= $kegiatan->peserta ?></p>
-                            <p class="card-text">Agenda: <?= $kegiatan->agenda ?></p>
+                            <p class="card-text">Waktu: {{ $kegiatan->waktu }}</p>
+                            <p class="card-text">Lokasi: {{ $kegiatan->lokasi }}</p>
+                            <p class="card-text">Peserta: {{ $kegiatan->peserta }}</p>
+                            <div class="card-text collapse multi-collapse"
+                                id="multiCollapseExample{{ $kegiatan->id }}">
+                                {!! $kegiatan->agenda !!}
+                            </div>
+                            <button type="button" class="btn btn-primary" data-toggle="collapse"
+                                data-target="#multiCollapseExample{{ $kegiatan->id }}" aria-expanded="false"
+                                aria-controls="multiCollapseExample{{ $kegiatan->id }}">Baca Lebih Lanjut
+                            </button>
                         </div>
                     </div>
                 </div>
             @endforeach
         </div>
     </div>
+
+
     <br>
     {{-- modal struktur organisasi --}}
     <div class="modal fade" id="StrukturModal" tabindex="-1" role="dialog" aria-labelledby="StrukturModalLabel"
@@ -321,20 +328,22 @@
                         <div class="table-responsive">
                             <div class="container mt-5">
                                 <h2>Form Pengajuan Surat</h2>
-                                <form action="/create/surat" method="POST" enctype="multipart/form-data">
+                                <form action="/create/surat" method="POST" enctype="multipart/form-data"
+                                    class="needs-validation" novalidate>
                                     @csrf
 
                                     <div class="form-group">
-                                        <label for="nama_pengaju">nama_pengaju</label>
+                                        <label for="nama_pengaju">Nama Lengkap</label>
                                         <input type="text" class="form-control" id="nama_pengaju"
                                             name="nama_pengaju" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="NIK">NIK</label>
-                                        <input type="text" pattern="[0-9]*" class="form-control" id="NIK"
-                                            name="NIK" required title="NIK hanya boleh berisi angka">
+                                        <input type="number" pattern="[0-9]{16}" class="form-control"
+                                            id="NIK" name="NIK" required
+                                            title="NIK harus terdiri dari 16 digit angka">
+                                        <div class="invalid-feedback">NIK harus terdiri dari 16 digit angka</div>
                                     </div>
-
                                     <div class="form-group">
                                         <label for="tempat_lahir">Tempat Lahir</label>
                                         <input type="text" class="form-control" id="tempat_lahir"
@@ -351,37 +360,66 @@
                                         <input type="text" class="form-control" id="pekerjaan" name="pekerjaan"
                                             required>
                                     </div>
-                                    <<div class="form-group">
+                                    <div class="form-group">
                                         <label for="status">Status</label>
                                         <select class="form-control" id="status" name="status" required>
                                             <option value="Menikah">Menikah</option>
                                             <option value="Belum Menikah">Belum Menikah</option>
                                         </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="alamat">Alamat</label>
+                                        <input type="text" class="form-control" id="alamat" name="alamat"
+                                            required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="keperluan">Keperluan</label>
+                                        <textarea class="form-control" id="keperluan" name="keperluan" rows="5" required></textarea>
+                                    </div>
+                                    <button type="submit" id="submitButton" class="btn btn-primary"
+                                        disabled>Submit</button>
+                                </form>
                             </div>
-                            <div class="form-group">
-                                <label for="alamat">Alamat</label>
-                                <input type="text" class="form-control" id="alamat" name="alamat" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="keperluan">Keperluan</label>
-                                <textarea class="form-control" id="keperluan" name="keperluan" rows="5" required></textarea>
-                            </div>
-                            {{-- <div class="form-group">
-                                            <label for="lampiran">Upload Lampiran:</label>
-                                            <input type="file" class="form-control-file" id="lampiran"
-                                                name="lampiran" required>
-                                        </div> --}}
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                            </form>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
+    <BR></BR>
+    <h1 style="text-align: center; font-family: Arial, sans-serif; font-size: 36px; color: #333; text-shadow: 2px 2px 2px #ccc; margin-top: 50px;"
+        id="surat">DAFTAR PENGAJUAN SURAT</h1>
+    <br><br>
+    <div class="container container-fluid">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($surats as $surat)
+                        <tr>
+                            <td>{{ $surat->nama_pengaju }}</td>
+                            <td>
+                                <a href="{{ route('generate.pdf', ['id' => $surat->id]) }}" class="btn btn-success">
+                                    Download
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        <!-- Pagination Links -->
+        <div class="d-flex justify-content-center">
+            {{ $surats->onEachSide(1)->fragment('surat')->links('vendor.pagination.bootstrap-4') }}
+        </div>
     </div>
 
     {{-- footer --}}
@@ -418,6 +456,7 @@
                         <li><a href="#">Instagram</a></li>
                         <li>telepon: <a href="#">089567482429</a></li>
                         <li>email: <a href="#">rw02bunder@gmail.com</a></li>
+                        <li>maps: <a href=""></a></li>
                     </ul>
                 </div>
 
@@ -440,6 +479,47 @@
     $(document).ready(function() {
         $('.multi-collapse').on('show.bs.collapse', function() {
             $('.multi-collapse').not(this).collapse('hide');
+        });
+    });
+    document.addEventListener("DOMContentLoaded", function() {
+        var nikInput = document.getElementById("NIK");
+        var submitButton = document.getElementById("submitButton");
+
+        nikInput.addEventListener("input", function() {
+            var isValid = /^\d{16}$/.test(nikInput.value);
+
+            if (!isValid) {
+                nikInput.classList.add("is-invalid");
+                submitButton.disabled = true; // Menonaktifkan tombol submit
+            } else {
+                nikInput.classList.remove("is-invalid");
+                submitButton.disabled = false; // Mengaktifkan tombol submit
+            }
+        });
+    });
+    $(document).ready(function() {
+        $('.read-more-btn').on('click', function() {
+            var card = $(this).closest('.my-card');
+            var cardBody = card.find('.card-body');
+            var cardText = card.find('.card-text.agenda');
+            var footer = card.find('.card-footer');
+
+            if (card.hasClass('full-card')) {
+                // Contract the card
+                cardBody.css('max-height', '150px');
+                card.removeClass('full-card');
+                cardText.hide(); // Sematkan tulisan saat belum di klik
+                footer.css('position', 'relative'); // Atur posisi footer kembali ke relatif
+                $(this).text('Baca Lebih Lanjut');
+            } else {
+                // Expand the card
+                cardBody.css('max-height', 'none');
+                card.addClass('full-card');
+                cardText.show(); // Tampilkan tulisan saat di klik
+                footer.css('position',
+                    'static'); // Atur posisi footer ke statis untuk mengikuti ke bawah
+                $(this).text('Tutup');
+            }
         });
     });
 </script>

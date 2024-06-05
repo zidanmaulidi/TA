@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pengajuansurat', function (Blueprint $table) {
             $table->id();
             $table->string('nama_pengaju');
-            $table->integer('NIK');
+            $table->bigInteger('NIK');
             $table->string('tempat_lahir');
             $table->date('tgl_lahir');
             $table->string('pekerjaan');

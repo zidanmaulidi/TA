@@ -8,214 +8,136 @@
     <style>
         @page {
             size: A4;
-            /* Set page size to A4 */
-            margin: 20mm;
-            /* Set margins for better printing */
+            margin: 1.5cm;
         }
 
         body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             margin: 0;
             padding: 0;
-            font-family: sans-serif;
         }
 
         .header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .header h3 {
-            font-size: 24px;
-            margin-bottom: 10px;
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            margin: 2px;
         }
 
         .body {
-            line-height: 1.5;
-        }
-
-        .footer {
+            line-height: 1.3;
+            flex: 2;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            border-top: 1px solid #ccc;
+            flex-direction: column;
+            width: 100%;
         }
 
-        .footer-left {
-            margin-left: 10px
-        }
-
-        .footer-right {
-
-            text-align: justify;
+        .container {
+            padding: 15px;
+            border: 1px solid #ccc;
+            flex: 1;
         }
 
         .list-unstyled {
-            margin: 0;
-            padding: 0;
             list-style: none;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="header">
-        <a href="/generate-pdf">p</a>
-        <h3>SURAT PENGANTAR</h3>
-        <p>DESA SIDORAHAYU, KECAMATAN WAGIR, DUSUN BUNDER</p>
-        <p>RUKUN TETANGGA 010, RUKUN WARGA 002</p>
-    </div>
-
-    <div class="body">
-        <p>Diberikan kepada:</p>
-        <ul class="list-unstyled">
-            <li><strong>Nama:</strong> Mia kidima Yuli widaRTI</li>
-            <li><strong>NIK:</strong> 35072147079100.06</li>
-            <li><strong>Tempat, Tgl Lahir:</strong> Malang, os-07-1991</li>
-            <li><strong>Pekerjaan:</strong> swasta</li>
-            <li><strong>Status:</strong> Kawin</li>
-            <li><strong>Alamat:</strong> Dusun Bunder</li>
-        </ul>
-        <p><strong>Keperluan:</strong> minta Donosili</p>
-        <br>
-        <p>Demikian surat pengantar ini kami buat untuk dapat dipergunakan sebagaimana dimaksud</p>
-    </div>
-    <br> <br> <br> <br> <br>
-    <br> <br> <br> <br> <br>
-    <div class="footer">
-        <div class="footer-left">
-            <p style="margin-bottom: -5px">Mengetahui,</p>
-            <p>Ketua RW 002</p>
-            <br>
-            <p>............................</p>
-        </div>
-        <div class="footer-right">
-            <p id="tanggal" style="margin-bottom: -5px">Sidorahayu,</p>
-            <p>Ketua RT 010</p>
-            <br>
-            <p>............................</p>
-        </div>
-    </div>
-
-    <script>
-        // Get the current date (same script as before)
-    </script>
-</body>
-
-</html>
-
-{{-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surat Pengantar</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            margin: 0;
             padding: 0;
-            /* Remove default body styles (background color, font, etc.) */
-            background-color: #fff;
-            font-family: sans-serif;
+            margin: 0;
         }
 
-        .card {
-            width: 210mm;
-            /* Set width to A4 size */
-            height: 297mm;
-            /* Set height to A4 size */
-            margin: 0 auto;
-            padding: 10mm;
-            /* Adjust padding as needed */
-            border: 1px solid #ccc;
-            /* Add a border for better visibility */
+        .row {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
         }
 
-        .card-header {
+        .col {
+            flex: 1;
             text-align: center;
         }
 
-        .card-body {
-            padding-top: 20px;
-            /* Adjust padding-top for better content positioning */
+        table {
+            width: 100%;
         }
 
-        .footer {
-            display: flex;
-            align-items: center;
-            padding: 10px;
-            border-top: 1px solid #ccc;
-        }
-
-        .footer-left,
-        .footer-right {
-            flex: 1;
-            /* Make footer-left and footer-right equally wide */
-            text-align: justify;
-            /* Adjust text alignment for better formatting */
-        }
-
-        .list-unstyled {
-            margin: 0;
-            padding: 0;
-            list-style: none;
+        table th:nth-child(2) {
+            padding-left: 350px;
         }
     </style>
 </head>
 
 <body>
-    <div class="card">
-        <div class="card-header text-center">
+    <div class="container">
+        <div class="header">
             <h3>SURAT PENGANTAR</h3>
             <p>DESA SIDORAHAYU, KECAMATAN WAGIR, DUSUN BUNDER</p>
             <p>RUKUN TETANGGA 010, RUKUN WARGA 002</p>
+            <hr>
         </div>
 
-        <div class="card-body">
+        <div class="body">
+            <h3 style="text-align: center">SURAT PENGANTAR</h3>
+            <p style="text-align: center">No: ......................................</p>
             <p>Diberikan kepada:</p>
-            <ul class="list-unstyled">
-                <li><strong>Nama:</strong> Mia kidima Yuli widaRTI</li>
-                <li><strong>NIK:</strong> 35072147079100.06</li>
-                <li><strong>Tempat, Tgl Lahir:</strong> Malang, os-07-1991</li>
-                <li><strong>Pekerjaan:</strong> swasta</li>
-                <li><strong>Status:</strong> Kawin</li>
-                <li><strong>Alamat:</strong> Dusun Bunder</li>
-            </ul>
-            <p><strong>Keperluan:</strong> minta Donosili</p>
-            <br>
-            <p>Demikian surat pengantar ini kami buat untuk dapat dipergunakan sebagaimana dimaksud.</p>
-        </div>
+            @if ($surats)
+                <ul class="list-unstyled">
+                    <li><strong>Nama:</strong> {{ $surats->nama_pengaju }}</li>
+                    <li><strong>NIK:</strong> {{ $surats->NIK }}</li>
+                    <li><strong>Tempat Lahir:</strong> {{ $surats->tempat_lahir }}</li>
+                    <li><strong>Tanggal Lahir:</strong> {{ $surats->tgl_lahir }}</li>
+                    <li><strong>Pekerjaan:</strong> {{ $surats->pekerjaan }}</li>
+                    <li><strong>Status:</strong> {{ $surats->status }}</li>
+                    <li><strong>Alamat:</strong> {{ $surats->alamat }}</li>
+                    <li><strong>Keperluan:</strong> {{ $surats->keperluan }}</li>
+                </ul>
+            @else
+                <p>Data tidak ditemukan</p>
+            @endif
 
-        <div class="footer">
-            <div class="footer-left">
-                <p style="margin-bottom: -5px">Mengetahui,</p>
-                <p>Ketua RW 002</p>
-                <br>
-                <p>............................</p>
-            </div>
-            <div class="footer-right">
-                <p id="tanggal" style="margin-bottom: -5px">Sidorahayu,</p>
-                <p>Ketua RT 010</p>
-                <br>
-                <p>............................</p>
-            </div>
+            <br>
+            <p>Demikian surat pengantar ini kami buat untuk dapat dipergunakan sebagaimana dimaksud</p>
+            <br>
+            <br><br><br><br><br><br>
+            <br><br><br><br><br><br>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mengetahui</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                        <th>Sidorahayu, <?php echo date('d-m-Y'); ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ketua RW</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>Ketua RT</td>
+                    </tr>
+                    <tr>
+                        <td> <br> <br> <br> <br>.................... </td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td><br> <br> <br> <br>................... </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
+</body>
 
-    <script>
-        // Get the current date
-        const today = new Date();
-
-        // Get the day of the month
-        const day = today.getDate();
-
-        // Get the month
-        const month = today.getMonth() + 1; // January is 0, so we add 1
-
-        // Get the year
-        const year = today.getFullYear();
-
-        // Format the date string
-        const formattedDate = `<span class="math-inline">\{day\}\-</span>{month --}}
+</html>

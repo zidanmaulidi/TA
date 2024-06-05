@@ -20,5 +20,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [InformasiController::class, 'index'])->name('index');
 Route::post('/create', [LandingPageController::class, 'store']);
 Route::post('/create/surat', [SuratController::class, 'store']);
-Route::get('/pdf', [SuratController::class, 'index']);
-Route::get('/generate-pdf', [PDFController::class, 'generatePDF']);
+Route::get('/pdf/{id}', [SuratController::class, 'index'])->name('indexPdf');
+Route::get('surat/generate-pdf/{id}', [PDFController::class, 'generatePDF'])->name('generate.pdf');

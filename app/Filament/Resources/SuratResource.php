@@ -26,9 +26,8 @@ class SuratResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     protected static ?string $navigationGroup = 'Menu';
-    protected static ?string $title = 'Surat';
-    protected static ?string $navigationLabel = 'Surat';
     protected static ?string $pluralLabel = 'Surat';
+
 
     public static function form(Form $form): Form
     {
@@ -51,16 +50,17 @@ class SuratResource extends Resource
 
     public static function table(Table $table): Table
     {
+
         return $table
             ->columns([
-                TextColumn::make('id'),
-                TextColumn::make('NIK'),
-                TextColumn::make('tempat_lahir'),
-                TextColumn::make('tgl_lahir'),
-                TextColumn::make('pekerjaan'),
-                TextColumn::make('status'),
-                TextColumn::make('alamat'),
-                TextColumn::make('keperluan')
+                TextColumn::make('id')->label('ID'),
+                TextColumn::make('NIK')->label('NIK'),
+                TextColumn::make('tempat_lahir')->label('Tempat Lahir'),
+                TextColumn::make('tgl_lahir')->label('Tanggal Lahir'),
+                TextColumn::make('pekerjaan')->label('Pekerjaan'),
+                TextColumn::make('status')->label('Status'),
+                TextColumn::make('alamat')->label('Alamat'),
+                TextColumn::make('keperluan')->label('Keperluan')
 
             ])
             ->filters([
@@ -70,7 +70,8 @@ class SuratResource extends Resource
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
-        
+
+
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -88,7 +89,7 @@ class SuratResource extends Resource
     {
         return [
             'index' => Pages\ListSurats::route('/'),
-            'create' => Pages\CreateSurat::route('/create'),
+            'create' => Pages\CreateSurat::route('/create', 'Create Surat'),
             'edit' => Pages\EditSurat::route('/{record}/edit'),
 
         ];
