@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Exports\KeuanganExport;
 use Filament\Forms;
 use Filament\Tables;
 use App\Models\Keuangan;
@@ -17,6 +18,8 @@ use App\Filament\Resources\KeuanganResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\KeuanganResource\RelationManagers;
 use App\Filament\Resources\KeuanganResource\Widgets\StatsOverview;
+use Filament\Tables\Actions\Action;
+use Maatwebsite\Excel\Facades\Excel;
 
 class KeuanganResource extends Resource
 {
@@ -51,11 +54,11 @@ class KeuanganResource extends Resource
         return $table
             ->columns([
                 //
-                TextColumn::make('tanggal')->searchable(),
-                TextColumn::make('keterangan')->searchable(),
-                TextColumn::make('uang_masuk'),
-                TextColumn::make('uang_keluar'),
-                TextColumn::make('saldo_kas'),
+                TextColumn::make('tanggal')->searchable()->label('ID'),
+                TextColumn::make('keterangan')->searchable()->label('Keterangan'),
+                TextColumn::make('uang_masuk')->label('Uang Masuk'),
+                TextColumn::make('uang_keluar')->label('Uang Keluar'),
+                TextColumn::make('saldo_kas')->label('Saldo Kas'),
             ])
             ->filters([
                 //
@@ -64,6 +67,14 @@ class KeuanganResource extends Resource
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+                Action::make('export')
+                    ->label('Export to Excel')
+                    ->action(function () {
+                        return Excel::download(new KeuanganExport, 'keuangan.xlsx');
+                    })
+                    ->color('success')
+                    ->icon('heroicon-o-download'),
+
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

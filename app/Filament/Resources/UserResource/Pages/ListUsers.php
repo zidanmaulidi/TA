@@ -16,12 +16,6 @@ class ListUsers extends ListRecords
     {
         return [
             Actions\CreateAction::make(),
-        ];
-    }
-
-    protected function getHeaderActions(): array
-    {
-        return [
             Actions\Action::make('export')
                 ->label('Export to Excel')
                 ->action(function () {

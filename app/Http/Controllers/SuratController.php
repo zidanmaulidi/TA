@@ -46,6 +46,6 @@ class SuratController extends Controller
 
 
         // Redirect atau kembalikan respons sesuai kebutuhan
-        return redirect()->route('index')->with('success', 'Surat berhasil disimpan!');
+        return response()->json(['success' => true, 'id' => $surat->id]);
     }
 }
